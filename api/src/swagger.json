@@ -2804,9 +2804,7 @@
             },
             "example": [
               "cosmos",
-              "general",
-              "chainlink",
-              "substrate"
+              "general"
             ]
           }
         }
@@ -2817,12 +2815,6 @@
             "type": "object",
             "properties": {
               "cosmos": {
-                "$ref": "#/components/schemas/monitorable"
-              },
-              "chainlink": {
-                "$ref": "#/components/schemas/monitorable"
-              },
-              "substrate": {
                 "$ref": "#/components/schemas/monitorable"
               },
               "general": {

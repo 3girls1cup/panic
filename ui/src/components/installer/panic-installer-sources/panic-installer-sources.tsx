@@ -7,7 +7,6 @@ import {Config} from "../../../../../entities/ts/Config";
 import {SourceType} from "../../../../../entities/ts/SourceType";
 import {NodeSubconfig} from "../../../../../entities/ts/NodeSubconfig";
 import {EVMNodeSubconfig} from "../../../../../entities/ts/EVMNodeSubconfig";
-import {ContractSubconfig} from "../../../../../entities/ts/ContractSubconfig";
 import {SystemSubconfig} from "../../../../../entities/ts/SystemSubconfig";
 import {BaseChain} from "../../../../../entities/ts/BaseChain";
 import {Router} from "stencil-router-v2";
@@ -361,15 +360,8 @@ export class PanicInstallerSources {
         if (getBaseChain)
             this.baseChain = await BaseChainService.getInstance().getByID(this.config.baseChain.id);
 
-        if (this.config.nodes && this.config.nodes.length > 0 && (this.baseChain.value === "cosmos" || this.baseChain.value === "substrate")) {
+        if (this.config.nodes && this.config.nodes.length > 0 && this.baseChain.value === "cosmos") {
             this.monitorNetwork = this.config.nodes[0].monitorNetwork;
-            if(this.baseChain.value === "substrate") {
-                this.governanceAddresses = this.config.nodes[0].governanceAddresses;
-            }
-        }
-
-        if (this.baseChain.value === "chainlink" && !this.config.contract) {
-            this.config.contract = {url: "", monitor: false} as ContractSubconfig;
         }
     }
 

@@ -115,12 +115,6 @@ export class PanicInstallerSourcesCard {
     return this.baseChain.value === "cosmos";
   }
 
-  /**
-   * Returns whether the base chain is substrate.
-   */
-  isBaseChainSubstrate(): boolean {
-    return this.baseChain.value === "substrate";
-  }
 
   /**
    * Returns whether the base chain is general.
@@ -140,7 +134,7 @@ export class PanicInstallerSourcesCard {
    * Returns whether to display network monitoring JSX.
    */
   shouldDisplayNetworkMonitoring(): boolean {
-    return (this.isBaseChainCosmos() || this.isBaseChainSubstrate()) && this.hasSources();
+    return this.isBaseChainCosmos() && this.hasSources();
   }
 
   /**
@@ -244,22 +238,6 @@ export class PanicInstallerSourcesCard {
               lines={"inset"}
               onChangeEventName={"monitorNetworkChange"}
             />
-            {
-              this.isBaseChainSubstrate() &&
-              <div class={'panic-installer-sources-form__row-container'}>
-                <svc-multiple-input
-                  name={'governanceAddresses'}
-                  value={this.governanceAddresses
-                    && HelperAPI.extractChipTypeArrayFromCommaSeparatedString(this.governanceAddresses, true)}
-                  label={'Governance Addresses'}
-                  placeholder={'12xtGHlkyrmbniiWQqJtECiBQrMn8AypQcXhnQAc6RB6JlKm [Press Enter after each address]'}
-                  outline={true}
-                  disabled={!this.monitorNetwork}
-                  addEventName={"governanceAddressesAdd"}
-                  removeEventName={"governanceAddressesRemove"}
-                />
-              </div>
-            }
           </svc-surface>
         }
       </div>
